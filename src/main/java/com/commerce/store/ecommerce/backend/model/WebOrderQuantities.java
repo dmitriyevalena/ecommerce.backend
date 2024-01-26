@@ -21,4 +21,36 @@ public class WebOrderQuantities {
     @ManyToOne(optional = false)
     @JoinColumn(name = "order_id", nullable = false  )
     private WebOrder order;
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
+    public WebOrder getOrder() {
+        return order;
+    }
+
+    public void setOrder(WebOrder order) {
+        this.order = order;
+    }
 }

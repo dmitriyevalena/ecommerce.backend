@@ -48,4 +48,12 @@ public class WebOrder {
     public void setAddress(Address address) {
         this.address = address;
     }
+
+    public List<WebOrderQuantities> getQuantities() {
+        return quantities;
+    }
+
+    public void setQuantities(List<WebOrderQuantities> quantities) {
+        this.quantities = quantities;
+    }
 }

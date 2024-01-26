@@ -4,12 +4,12 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
-@Entity
+//@Entity
 public class TestDataObject {
 
-    @Id
+//    @Id
     private long id;
 
-    @Column
+//    @Column
     private String userName;
 }
