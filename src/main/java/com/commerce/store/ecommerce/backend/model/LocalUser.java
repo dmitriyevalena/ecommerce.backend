@@ -1,5 +1,6 @@
 package com.commerce.store.ecommerce.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -23,12 +24,15 @@ public class LocalUser {
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
+    @JsonIgnore
     @Column(name = "password", nullable = false, length = 1000)
     private String password;
 
     @Column(name = "email", nullable = false, unique = true, length = 320)
     private String email;
 
+//    Hibernate by default makes fetch type "lazy", it won't fetch these addresses until call  getAddresses
+    @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Address> addresses = new ArrayList<>();
 
