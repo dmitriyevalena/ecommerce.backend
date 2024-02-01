@@ -49,6 +49,7 @@ public class WebOrder {
         this.address = address;
     }
 
+    @OneToMany(mappedBy = "order", cascade = CascadeType.REMOVE, orphanRemoval = true)
     public List<WebOrderQuantities> getQuantities() {
         return quantities;
     }
