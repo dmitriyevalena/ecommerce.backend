@@ -1,0 +1,1 @@
+Alter table local_user add email_verified bit Not null default 0

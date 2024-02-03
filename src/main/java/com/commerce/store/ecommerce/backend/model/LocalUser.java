@@ -39,6 +39,15 @@ public class LocalUser {
 //    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, orphanRemoval = true)
 //    private List<WebOrder> orders = new ArrayList<>();
 
+    /** Verification tokens sent to the user. */
+//    @JsonIgnore
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OrderBy("id desc")
+    private List<VerificationToken> verificationTokens = new ArrayList<>();
+
+    @Column(name = "email_verified", nullable = false)
+    private boolean emailVerified = false;
+
     public String getUserName() {
         return userName;
     }
@@ -93,5 +102,21 @@ public class LocalUser {
 
     public void setAddresses(List<Address> addresses) {
         this.addresses = addresses;
+    }
+
+    public List<VerificationToken> getVerificationTokens() {
+        return verificationTokens;
+    }
+
+    public void setVerificationTokens(List<VerificationToken> verificationTokens) {
+        this.verificationTokens = verificationTokens;
+    }
+
+    public boolean isEmailVerified() {
+        return emailVerified;
+    }
+
+    public void setEmailVerified(boolean emailVerified) {
+        this.emailVerified = emailVerified;
     }
 }
