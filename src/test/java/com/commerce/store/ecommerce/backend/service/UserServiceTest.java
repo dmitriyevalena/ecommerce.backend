@@ -28,6 +28,7 @@ public class UserServiceTest {
     private UserService userService;
 
     @Test
+//    Any data that we store we don't want to be kept
     @Transactional
     public void testRegisterUser() throws MessagingException {
         RegistrationBody body = new RegistrationBody();
@@ -46,5 +47,11 @@ public class UserServiceTest {
         Assertions.assertDoesNotThrow(()->userService.registerUser(body),
                 "User should register successfully.");
         Assertions.assertEquals(body.getEmail(), greenMailExtension.getReceivedMessages()[0].getRecipients(Message.RecipientType.TO)[0].toString());
+    }
+
+    @Test
+    @Transactional
+    public void testLoginUser(){
+        
     }
 }
