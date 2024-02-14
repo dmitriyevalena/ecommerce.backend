@@ -40,7 +40,7 @@ public class LocalUser {
 //    private List<WebOrder> orders = new ArrayList<>();
 
     /** Verification tokens sent to the user. */
-//    @JsonIgnore
+    @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @OrderBy("id desc")
     private List<VerificationToken> verificationTokens = new ArrayList<>();
