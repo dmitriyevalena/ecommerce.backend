@@ -4,6 +4,7 @@ import com.commerce.store.ecommerce.backend.api.model.LoginBody;
 import com.commerce.store.ecommerce.backend.api.model.LoginResponse;
 import com.commerce.store.ecommerce.backend.api.model.RegistrationBody;
 import com.commerce.store.ecommerce.backend.exception.EmailFailureException;
+import com.commerce.store.ecommerce.backend.exception.EmailNotFoundException;
 import com.commerce.store.ecommerce.backend.exception.UserAlreadyExistsException;
 import com.commerce.store.ecommerce.backend.exception.UserNotVerifiedException;
 import com.commerce.store.ecommerce.backend.model.LocalUser;
@@ -84,4 +85,16 @@ public class AuthenticationController {
 //        SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return user;
     }
+    
+	@PostMapping("/forgot")
+	public ResponseEntity forgotPassword(@RequestParam String email) {
+		try {
+			userService.forgotPassword(email);
+			return ResponseEntity.ok().build();
+		} catch (EmailNotFoundException e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+		} catch (EmailFailureException e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+		}
+	}
 }
