@@ -1,6 +1,7 @@
 package com.commerce.store.ecommerce.backend.service;
 
 import com.commerce.store.ecommerce.backend.api.model.LoginBody;
+import com.commerce.store.ecommerce.backend.api.model.PasswordResetBody;
 import com.commerce.store.ecommerce.backend.api.model.RegistrationBody;
 import com.commerce.store.ecommerce.backend.exception.EmailFailureException;
 import com.commerce.store.ecommerce.backend.exception.EmailNotFoundException;
@@ -117,4 +118,14 @@ public class UserService {
         		throw new EmailNotFoundException();
         	}
         }
-}
+        
+		public void resetPassword(PasswordResetBody body) {
+			String email = jwtService.getResetPasswordEmail(body.getToken());
+			Optional<LocalUser> opUser = localUserDAO.findByEmailIgnoreCase(email);
+			if (opUser.isPresent()) {
+				LocalUser user = opUser.get();
+				user.setPassword(encryptionService.encryptPassword(body.getPassword()));
+				localUserDAO.save(user);
+			}
+		}
+	}

@@ -2,6 +2,7 @@ package com.commerce.store.ecommerce.backend.api.controller.auth;
 
 import com.commerce.store.ecommerce.backend.api.model.LoginBody;
 import com.commerce.store.ecommerce.backend.api.model.LoginResponse;
+import com.commerce.store.ecommerce.backend.api.model.PasswordResetBody;
 import com.commerce.store.ecommerce.backend.api.model.RegistrationBody;
 import com.commerce.store.ecommerce.backend.exception.EmailFailureException;
 import com.commerce.store.ecommerce.backend.exception.EmailNotFoundException;
@@ -96,5 +97,11 @@ public class AuthenticationController {
 		} catch (EmailFailureException e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
+	}
+	
+	@PostMapping("/reset")
+	public ResponseEntity resetPassword(@Valid @RequestBody PasswordResetBody body) {
+		userService.resetPassword(body);
+		return ResponseEntity.ok().build();
 	}
 }
